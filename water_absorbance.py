@@ -59,6 +59,14 @@ class Raw_data_Plot:
     
 
     def multiple_plot_show(self, label:list):
+        """Displaying multiple Plots in one Figure
+
+        Args:
+            label (list): Label of the plots
+
+        Returns:
+            Plot: showing multiple Plots in one Figure
+        """
         filename = self.file_path
         fig = plt.figure()
         ax = fig.add_subplot()
@@ -66,12 +74,12 @@ class Raw_data_Plot:
         rawdata = self.dptfile_to_dict()
         for i in range(len(filename)):
 
-            plt.plot(rawdata[i]["wavenumber"], rawdata[i]["extinction"], label = label[i] + " Max SI: " + str(round(max(rawdata[i]["extinction"][1633:1936]),3)))
+            plt.plot(rawdata[i]["wavenumber"], rawdata[i]["extinction"], label = label[i])# + " Max SI: " + str(round(max(rawdata[i]["extinction"][1633:1936]),3)))
 
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
-        plt.grid(axis='x', color='0.95')
-        ax.set(xlim=(1550, 1900), ylim = (-0.02, 0.35))
+        plt.grid(axis='both', color='0.95')
+        ax.set(xlim=(1560, 1710), ylim = (-0.1, 0.1))
         plt.legend()
         plt.show()
 
@@ -130,18 +138,19 @@ citricacid_standardcurve = Raw_data_Plot([
             "raw_data/2mMCitronensaeure.DPT",
                                           ])
 
-
-""" print(citricacid_standardcurve.multiple_plot_show([
-        "0.2 mM",
-        "0.4 mM",
-       "0.6 mM",
-       "0.8 mM",
-        "1.0 mM",
-        "1.2 mM",
-        "1.4 mM",
-        "1.6 mM",
-        "1.8 mM",
-        "2.0 mM",
-    ])) """
+allwater = Raw_data_Plot(["raw_data/pHneutral_Polylysin.DPT", "raw_data/pH1162_Polylysin.DPT", "raw_data/50grad_Polylysin.DPT"])
+print(allwater.multiple_plot_show(["pH neutral ", "pH = 11.62 ", "pH neutral at 50°C "]))
+print(citricacid_standardcurve.multiple_plot_show([
+        "0.2 mM, ",
+        "0.4 mM, ",
+       "0.6 mM, ",
+       "0.8 mM, ",
+        "1.0 mM, ",
+        "1.2 mM, ",
+        "1.4 mM, ",
+        "1.6 mM, ",
+        "1.8 mM, ",
+        "2.0 mM, ",
+    ]))
 print("______")
 print(citricacid_standardcurve.standardcurve())
