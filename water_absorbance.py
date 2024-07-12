@@ -79,7 +79,7 @@ class Raw_data_Plot:
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
         plt.grid(axis='both', color='0.95')
-        ax.set(xlim=(1560, 1710), ylim = (-0.1, 0.1))
+        #ax.set(xlim=(1560, 1710), ylim = (-0.1, 0.1))
         plt.legend()
         plt.show()
 
@@ -119,6 +119,113 @@ class Raw_data_Plot:
         plt.show()
         return None
 
+
+    def fit_gaussian_to_data(self):
+        filename = self.file_path
+
+        #Define the Gaussian function 
+
+        def Gauss(x,a,x0,sigma):
+            return a * np.exp(-(x-x0)**2/(2*sigma**2))
+
+        
+        rawdata = self.dptfile_to_dict()
+        wavenumber = []
+        extinction = []
+        for k in range(len(filename)):
+            wavenumber.append(rawdata[k]["wavenumber"][1633:1936])
+            extinction.append(rawdata[k]["extinction"][1633:1936])
+
+        fig = plt.figure()
+        ax = fig.add_subplot()
+
+        for i in range(len(filename)):
+            x = np.asarray(wavenumber[i])
+            y = np.asarray(extinction[i])
+                        
+            mean = x[y.argmax()]                  #note this correction
+            sigma = mean - np.where(y > y.max() * np.exp(-.5))[0][0]        #note this correction
+
+            popt, pcov = curve_fit(Gauss, x, y, p0 = [y.max(),mean,sigma])
+            # residuals = y - Gauss(x, *popt)
+            # ss_res = np.sum(residuals ** 2)
+            # ss_total = np.sum((y - np.mean(y)) ** 2)
+            # r_square = 1 - (ss_res / ss_total)
+
+            # std = np.sqrt(np.diag(pcov))
+
+            # best fit
+            pop,cot = curve_fit(Gauss, x, y, p0 = [*popt])
+
+            max_extinction = y[extinction[i].index(y.max())-30 : extinction[i].index(y.max())+30]
+            max_wavenumber = x[extinction[i].index(y.max())-30 : extinction[i].index(y.max())+30]
+            # breakpoint()
+            sh_mean = max_wavenumber[max_extinction.argmax()]
+            sh_sigma = max_wavenumber[max_extinction.argmax()] - np.where(max_extinction > max_extinction.max() * np.exp(-.5))[0][0]
+
+            shorten_popt, shorten_cov = curve_fit(Gauss, max_wavenumber, max_extinction, p0 = [*pop])
+
+            x_value = np.linspace(x.min(), x.max())
+            plt.plot(x, y, label = "Raw Data")
+            # plt.plot(x_value, Gauss(x_value, *popt), label = "fit", linestyle= "dotted") # fit
+            # plt.plot(x_value, Gauss(x_value, *pop), label = "best fit", linestyle= 'dashdot')
+            plt.plot(x_value, Gauss(x_value, *shorten_popt), label = "shorten fit", linestyle= 'dashed')
+
+        plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
+        plt.ylabel("SI", fontsize=12)
+        ax.set(xlim=(min(wavenumber[0]), max(wavenumber[0])))
+        plt.legend()
+        plt.show()
+        return None
+
+    
+    def fit_two_exponential(self):
+        filename = self.file_path
+
+        #Define the Gaussian function 
+
+        def Expo(x, a, b, p, q):
+            return 1 + ( 1 / (a * np.exp(p * x) + b * np.exp( -q * x)))
+
+        
+        rawdata = self.dptfile_to_dict()
+        wavenumber = []
+        extinction = []
+        for k in range(len(filename)):
+            wavenumber.append(np.asarray(rawdata[k]["wavenumber"][1633:1936]))
+            extinction.append(np.asarray(rawdata[k]["extinction"][1633:1936]))
+
+        fig = plt.figure()
+        ax = fig.add_subplot()
+
+        for i in range(len(filename)):
+            x = wavenumber[i]
+            y = extinction[i]
+                        
+            mean = x[y.argmax()]                  #note this correction
+            sigma = mean - np.where(y > y.max() * np.exp(-.5))[0][0]        #note this correction
+
+            popt, pcov = curve_fit(Expo, x, y, p0 = [y.min(), y.max()*10 ,0.5, 1.75])
+            residuals = y - Expo(x, *popt)
+            ss_res = np.sum(residuals ** 2)
+            ss_total = np.sum((y - np.mean(y)) ** 2)
+            r_square = 1 - (ss_res / ss_total)
+
+            std = np.sqrt(np.diag(pcov))
+
+            x_value = np.linspace(x.min(), x.max())
+            # breakpoint()
+            plt.plot(x, y, label = "Raw Data")
+            plt.plot(x_value, Expo(x_value, *popt), label = "fit", linestyle= "dotted") # fit
+
+        plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
+        plt.ylabel("SI", fontsize=12)
+        ax.set(xlim=(min(wavenumber[0]), max(wavenumber[0])))
+        plt.legend()
+        plt.show()
+    
+        return None       
+
     
 
 
@@ -138,19 +245,21 @@ citricacid_standardcurve = Raw_data_Plot([
             "raw_data/2mMCitronensaeure.DPT",
                                           ])
 
-allwater = Raw_data_Plot(["raw_data/pHneutral_Polylysin.DPT", "raw_data/pH1162_Polylysin.DPT", "raw_data/50grad_Polylysin.DPT"])
-print(allwater.multiple_plot_show(["pH neutral ", "pH = 11.62 ", "pH neutral at 50°C "]))
-print(citricacid_standardcurve.multiple_plot_show([
-        "0.2 mM, ",
-        "0.4 mM, ",
-       "0.6 mM, ",
-       "0.8 mM, ",
-        "1.0 mM, ",
-        "1.2 mM, ",
-        "1.4 mM, ",
-        "1.6 mM, ",
-        "1.8 mM, ",
-        "2.0 mM, ",
-    ]))
-print("______")
-print(citricacid_standardcurve.standardcurve())
+allwater = Raw_data_Plot(["raw_data/H2O.DPT", "raw_data/D2O.DPT", "raw_data/2mMCitronensaeure.DPT"])
+print(allwater.fit_gaussian_to_data())
+# print(allwater.fit_two_exponential())
+print([        "0.2 mM, ",
+            "0.4 mM, ",
+           "0.6 mM, ",
+          "0.8 mM, ",
+           "1.0 mM, ",
+            "1.2 mM, ",
+            "1.4 mM, ",
+            "1.6 mM, ",
+            "1.8 mM, ",
+            "2.0 mM, ",
+        ])
+# print("______")
+# print(citricacid_standardcurve.standardcurve())
+
+
