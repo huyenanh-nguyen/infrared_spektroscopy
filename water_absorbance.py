@@ -119,7 +119,8 @@ class Raw_data_Plot:
             
 
             x_value = np.linspace(x.min(), x.max())
-            plt.plot(x, y, label = "Raw Data")
+            raw_text = label[i] + " raw data"
+            plt.plot(x, y, label = raw_text)
             text = label[i] + " fit"
             plt.plot(x_value, Gauss(x_value, *shorten_popt), label = text, linestyle= 'dotted')
             max_extinction.append(Gauss(x_value, *shorten_popt).max())
@@ -181,7 +182,7 @@ allwater = Raw_data_Plot(["raw_data/H2O.DPT", "raw_data/D2O.DPT", "raw_data/2mMC
 print(allwater.fit_gaussian_to_data(["H$_2$O", "D$_2$O", "2mM Citric Acid"]))
 sample = Raw_data_Plot(["raw_data/probe1_Citronensaeure.DPT", "raw_data/probe2_Citronensaeure.DPT"]).fit_gaussian_to_data(["Sample 1", "Sample 2"])
 print(sample)
-print(citricacid_standardcurve.standardcurve(["0.2 mM ",
+print(citricacid_standardcurve.fit_gaussian_to_data(["0.2 mM ",
             "0.4 mM ",
            "0.6 mM ",
           "0.8 mM ",
