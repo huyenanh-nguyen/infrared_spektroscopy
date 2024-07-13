@@ -118,7 +118,7 @@ class Raw_data_Plot:
 
             
 
-            x_value = np.linspace(x.min(), x.max())
+            x_value = np.linspace(x.min(), x.max(),1000)
             raw_text = label[i] + " raw data"
             plt.plot(x, y, label = raw_text)
             text = label[i] + " fit"
@@ -128,6 +128,7 @@ class Raw_data_Plot:
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
         ax.set(xlim=(min(wavenumber[0]), max(wavenumber[0])))
+        plt.grid(axis='both', color='0.95')
         plt.legend()
         plt.show()
 
@@ -158,6 +159,7 @@ class Raw_data_Plot:
         plt.plot(x_value, linear(x_value, popt[0]), label = text, color = "orange")
         plt.xlabel("c(Citric Acid) in mM", fontsize=12)
         plt.ylabel("SI", fontsize=12)
+        plt.grid(axis='both', color='0.95')
         plt.legend()
         plt.show()
         return None
