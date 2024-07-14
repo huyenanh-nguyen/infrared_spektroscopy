@@ -97,28 +97,69 @@
 	
 	\section{Material und Methode}
 	Alle Messungen wurden am IFS 66v/S Spektrometer (Bruker, Berlin - Humboldt Universität zu Berlin am Biophysik Institut) durchgeführt.\\
-	Die gemessenen Infrarotspektren wurden die Maxima in den ausgewählten Analysenbereich mit der Gaussfunktion in Python (scipy, curve$\_$fit) bestimmt.
+	Für die Maximabestimmung wurden mit der Gaussfunktion die Peaks in den ausgewählten Wellenzahlbereich in Python (scipy, curve$\_$fit) gefittet.
 	
 	\subsection{Citronensäure-Messungen}
-	Die Citronensäureproben wurden in Wasser gelöst und bei Normaldruck und 20 Grad Celsius auf die ATR-Zelle aufgetragen und im Spektrometer gemessen.\\
+	Die Citronensäureproben wurden in Wasser gelöst und bei Normaldruck und 20 Grad Celsius auf die ATR-Zelle (Zink-Siliciumkristall) aufgetragen und das ART-Spektrum gemessen.\\
 	Gegen die Standardkurve, welches nach Table \ref{fig:IR_Standardcurve} hergestellt wurde, wurde die Konzentration der zwei unbekannten Citronensäureproben bestimmt.\\
-	Als Blanklösung wurde reines Wasser verwendet.\\
-
-	
+	Als Blanklösung wurde entionisiertes Wasser verwendet.\\
 	
 
-	Die in Wasser gelösten Citronensäurenproben wurde gegen die Srandardreihe, welches nach Table \ref{tab:pipettierschema Standardreihe} hergestellt wurde, gemessen.\\
-	Die Messung 
-	
 	\subsection{Polylysin}
-	Polylysin wurd in Deuteriumoxid gelöst und in unterschiedlichen Bedingungen die 
+	Polylysin wurde in Deuteriumoxid gelöst und das Transmissionsspektrum im Vakuum gemessen.\\
+	Die Proben wurden vor der Messung vorher in drei unterschiedlichen Bedingungen vorbehandelt:
+	\begin{itemize}
+		\item bei neutralen pH-Wert auf Eis
+		\item bei pH = 11.62 (pH-Einstellung mit Natronlauge)
+		\item 3 Minuten mit einer Heißluftpistole aufheizen
+	\end{itemize}
+	Als Blanklösung wurde Deuteriumoxid verwendet.
 	
 	
 	
 	\section{Ergebnis}
+	Die Kurven wurden am Hochpunkt mit der Gaussfunktion (Gl \ref{eq: Gauss}) gefittet und so die Maximawerte bestimmt.
+
+	\begin{equation}\label{eq: Gauss}
+		\text{f(x) = } a \cdot e^{-\frac{(x-x_0)^2}{2 \cdot \sigma^2}}
+	\end{equation}
+	
 	\subsection{Qualitative und Quantitative Bestimmung von Citronensäure}
 	
-	\subsubsection{Infrarotbande von Citronensäure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.85]{Onlywater.png}
+			\caption{Infrarotspektrum von Wasser und Deuteriumoxid.}
+			\label{fig:water}
+		\end{figure}
+	
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.65]{water_citricacid_upclose.png}
+			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und Citronensäure in Wasser im Wellenzahlbereich von 1450- 1930 cm$^{-1}$.}
+			\label{fig:water_citricacid}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.60]{Standardcurve_Fit.png}
+			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und 2mM Citronensäure in Wasser. Die Extrema in dem Bereich von Wasser und Deuteriumoxid überlappen mit dem Peak von Citronensäure.}
+			\label{fig:Standardcurve}
+		\end{figure}
+	
+		\begin{table}[H]
+			\centering
+			\caption{Pipettierschema der Standardreihe von Citronensäure in H$_2$O. Die molare Konzentration der Stammlösung beträgt 2mM in Wasser.}
+			\label{tab:sampleconc}
+			\begin{tabular}{cc}
+				\toprule
+				Samplename & c(Sample) in mM\\
+				\midrule
+				Sample 1 & 1.04\\
+				Sample 2 & 0.58\\
+				\bottomrule
+			\end{tabular}
+		\end{table}	
 	\subsubsection{Konzentrationsbestimmung von Citronensäure}
 	\subsection{Sekundärstrukturaufklärung von Polylysin}
 	
@@ -130,13 +171,6 @@
 	
 	\section{Anhang}
 	\subsection{Rohdaten}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.65]{water_citricacid_upclose.png}
-			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und 2mM Citronensäure in Wasser. Die Extrema in dem Bereich von Wasser und Deuteriumoxid überlappen mit dem Peak von Citronensäure.}
-			\label{fig:water_citricacid}
-		\end{figure}
-		
 		
 		\begin{figure}[H]
 			\centering
