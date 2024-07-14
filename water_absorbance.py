@@ -182,6 +182,7 @@ citricacid_standardcurve = Raw_data_Plot([
 
 allwater = Raw_data_Plot(["raw_data/H2O.DPT", "raw_data/D2O.DPT", "raw_data/2mMCitronensaeure.DPT"])
 print(allwater.fit_gaussian_to_data(["H$_2$O", "D$_2$O", "2mM Citric Acid"]))
+print(allwater.multiple_plot_show(["H$_2$O", "D$_2$O", "2mM Citric Acid"]))
 sample = Raw_data_Plot(["raw_data/probe1_Citronensaeure.DPT", "raw_data/probe2_Citronensaeure.DPT"]).fit_gaussian_to_data(["Sample 1", "Sample 2"])
 print(sample)
 print(citricacid_standardcurve.fit_gaussian_to_data(["0.2 mM ",
