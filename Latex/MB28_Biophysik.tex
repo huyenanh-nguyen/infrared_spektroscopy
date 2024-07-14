@@ -35,8 +35,7 @@
 \definecolor{Greyish}{HTML}{5A5A5A}
 \renewcommand{\refname}{Reference}
 \usepackage{array,multirow}
-\newcommand{\specialcell}[2][c]{%
-	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%\newcommand{\specialcell}[2][c]{%\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 
 
@@ -85,8 +84,8 @@
 	Die Energie die ein Molekül bzw Atom von den Infrarotstrahlungen absorbieren ist ausreichend um die Rorationszustandes eines Moleküls und die Schwingungszustandes einer Bindung charakteristisch zu verändern.
 	Damit ermöglich die Infrarotspektroskopie die Strukur eines Moleküles zu untersuchen.\\
 	Zusätzlich kann auch mit der Infrarotspektrometrie nicht nur die qualitative Analyse durchgeführt werden, sondern auch die quantitative Analyse. Dies bietet die Möglichkeit Konzentrationenbestimmungen durchzuführen die wo die klassischen Spektrometrie ihre Grenzen hat.\\
-	So liegt die Absorptionsbande von Citronensäure bei $\lambda$ = 200nm und ist mit den heutigen UV-Spetrometer kaum detektierbar \cite{Citricacid_UV}. Hier kann dann mit der Rotationsschwingungscharakter von Citronensäure die Konzentration gemessen werden.
-	Teil dieses Versuches wird die quantitative und qualitative Untersuchung von Citronensäure mittels 
+	So liegt die Absorptionsbande von Citronensäure bei $\lambda$ = 200nm und ist mit den heutigen UV-Spetrometer kaum detektierbar \cite{Citricacid_UV}. Da die Rotationszustände charakteristisch ist, kann nicht nur qualitativ Citronensäure bestimmt werden sondern auch quantitativ.\\
+	Für den Versuch wird das Spektrum der Citronensäure mittels Attenuated Total Reflection-Zelle (abgekürzt: ATR-Zelle) gemessen. Dabei 
 	
 	
 	
@@ -97,16 +96,31 @@
 	
 	
 	\section{Material und Methode}
-	\subsection{Infrarot-spektroskopische Analyse von Citronensäure}
-	\subsection{Sekundärstrukturanalyse von Polylysin}
+	Alle Messungen wurden am IFS 66v/S Spektrometer (Bruker, Berlin - Humboldt Universität zu Berlin am Biophysik Institut) durchgeführt.\\
+	Die gemessenen Infrarotspektren wurden die Maxima in den ausgewählten Analysenbereich mit der Gaussfunktion in Python (scipy, curve$\_$fit) bestimmt.
+	
+	\subsection{Citronensäure-Messungen}
+	Die Citronensäureproben wurden in Wasser gelöst und bei Normaldruck und 20 Grad Celsius auf die ATR-Zelle aufgetragen und im Spektrometer gemessen.\\
+	Gegen die Standardkurve, welches nach Table \ref{fig:IR_Standardcurve} hergestellt wurde, wurde die Konzentration der zwei unbekannten Citronensäureproben bestimmt.\\
+	Als Blanklösung wurde reines Wasser verwendet.\\
+
+	
+	
+
+	Die in Wasser gelösten Citronensäurenproben wurde gegen die Srandardreihe, welches nach Table \ref{tab:pipettierschema Standardreihe} hergestellt wurde, gemessen.\\
+	Die Messung 
+	
+	\subsection{Polylysin}
+	Polylysin wurd in Deuteriumoxid gelöst und in unterschiedlichen Bedingungen die 
+	
 	
 	
 	\section{Ergebnis}
-	\subsection{Qualitative und Quantitative Analyse von Citronensäure}
+	\subsection{Qualitative und Quantitative Bestimmung von Citronensäure}
 	
 	\subsubsection{Infrarotbande von Citronensäure}
 	\subsubsection{Konzentrationsbestimmung von Citronensäure}
-	\subsection{Infrarotbande der Sekundärstruktur von Polylysin}
+	\subsection{Sekundärstrukturaufklärung von Polylysin}
 	
 	
 	
@@ -131,6 +145,29 @@
 			\label{fig:IR_Standardcurve}
 		\end{figure}
 	
+		\subsubsection{Standardreihe Citronensäure}
+			\begin{table}[H]
+				\centering
+				\caption{Pipettierschema der Standardreihe von Citronensäure in H$_2$O. Die molare Konzentration der Stammlösung beträgt 2mM in Wasser.}
+				\label{tab:pipettierschema Standardreihe}
+				\begin{tabular}{ccc}
+					\toprule
+					c(Citronensäure) in mM &V(2mM Citronensäure) in mL & V(H$_2$O in mL)\\
+					\midrule
+					2.0 & 2.0 & 0.0\\
+					1.8 & 1.8 & 0.2\\
+					1.6 & 1.6 & 0.4 \\
+					1.4 & 1.4 & 0.6 \\
+					1.2 & 1.2 & 0.8\\
+					1.0 & 1.0 & 1.0 \\
+					0.8 & 0.8 & 1.2\\
+					0.6 & 0.6 & 1.4\\
+					0.4 & 0.4 & 1.6 \\
+					0.2 & 0.2 & 1.8 \\
+					0.0 & 0.0 & 2.0\\
+					\bottomrule
+				\end{tabular}
+			\end{table}	
 	
 	\addcontentsline{toc}{section}{References}
 	\bibliographystyle{plainurl}

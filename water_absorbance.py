@@ -86,7 +86,16 @@ class Raw_data_Plot:
         return None
 
 
-    def fit_gaussian_to_data(self, label):
+    def fit_gaussian_to_data(self, label, interval):
+        """_summary_
+
+        Args:
+            label (list): labelname for each graph in a list. name in str
+            interval (indexarea): example -> 1633:1936 
+
+        Returns:
+            List: wavenumber from each maxima and graph in that choosen area
+        """
         filename = self.file_path
 
         #Define the Gaussian function 
@@ -94,8 +103,8 @@ class Raw_data_Plot:
             return a * np.exp(-(x-x0)**2/(2*sigma**2))
 
         rawdata = self.dptfile_to_dict()
-        wavenumber = [rawdata[i]["wavenumber"][1633:1936] for i in range(len(filename))]
-        extinction = [rawdata[i]["extinction"][1633:1936] for i in range(len(filename))]
+        wavenumber = [rawdata[i]["wavenumber"][interval] for i in range(len(filename))]
+        extinction = [rawdata[i]["extinction"][interval] for i in range(len(filename))]
 
         fig = plt.figure()
         ax = fig.add_subplot()
