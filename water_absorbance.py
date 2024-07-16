@@ -130,6 +130,10 @@ class Raw_data_Plot:
             fit_wavenumber = x[extinction[i].index(y.max())-30 : extinction[i].index(y.max())+30]
 
             shorten_popt, shorten_cov = curve_fit(Gauss, fit_wavenumber, fit_extinction, p0 = [*popt])
+            residuals = fit_extinction - Gauss(np.asarray(fit_wavenumber), *shorten_popt)
+            ss_res = np.sum(residuals ** 2)
+            ss_total = np.sum((fit_extinction - np.mean(fit_extinction)) ** 2)
+            r_square = 1 - (ss_res / ss_total)
 
             
 
@@ -140,8 +144,9 @@ class Raw_data_Plot:
             plt.plot(x_value, Gauss(x_value, *shorten_popt), label = text, linestyle= 'dotted')
             max_extinction.append(Gauss(x_value, *shorten_popt).max())
             a.append(shorten_popt[0])
-            error.append(np.linalg.norm(y-Gauss(x, *shorten_popt))) # Frobenius norm
-            # breakpoint()
+            error.append(r_square)
+            # error.append(np.linalg.norm(y-Gauss(x, *shorten_popt))) # Frobenius norm -> could tell me how well it fits. but its better if i want to compare different model and look which one is the best fit
+
 
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
@@ -173,10 +178,10 @@ class Raw_data_Plot:
 
         text = "y = (" + str(round(popt[0],3)) + "$\pm$" + str(round(std[0], 4)) +") x \n"+ "R$^2$ = " + str(round(r_square, 3))
 
-        # plt.scatter(conc, extinction[0], marker = ".")
+        plt.scatter(conc, extinction[0], marker = ".")
         plt.plot(x_value, linear(x_value, popt[0]), label = text, color = "orange")
         plt.xlabel("c(Citric Acid) in mM", fontsize=12)
-        plt.errorbar(conc, extinction[0], yerr= extinction[-1], fmt=' ', capsize=3, color = "dimgrey")
+        # plt.errorbar(conc, extinction[0], yerr= extinction[-1], fmt=' ', capsize=3, color = "dimgrey")
         plt.ylabel("SI", fontsize=12)
         plt.grid(axis='both', color='0.95')
         plt.legend()
