@@ -82,6 +82,13 @@
 	\section{Einführung}	
 	Infrarotspektrometrie untersucht, anders als in der klassischen Spektroskopie nicht die Änderung der Energiezustandes der Elektronen in der äußersten Schalen der zu untersuchende Substaz sondern, die Änderung der Schwingungszustandes des Moleküles.\\
 	Die Energie die ein Molekül bzw Atom von den Infrarotstrahlungen absorbieren ist ausreichend um die Rorationszustandes eines Moleküls und die Schwingungszustandes einer Bindung charakteristisch zu verändern.
+	Dadurch ist es möglich die Struktur der zu untersuchende Molekül auszuklären.\\
+	\\
+	In der Infrarotspektroskopie gibt es unterschiedliche Methoden, wie die Infrarotwellen genutzt werden um die Proben zu untersuchen.\\
+	Die klassischste Methode ist die Transmissionsspektrometrie.
+	
+	
+	
 	Damit ermöglich die Infrarotspektroskopie die Strukur eines Moleküles zu untersuchen.\\
 	Zusätzlich kann auch mit der Infrarotspektrometrie nicht nur die qualitative Analyse durchgeführt werden, sondern auch die quantitative Analyse. Dies bietet die Möglichkeit Konzentrationenbestimmungen durchzuführen die wo die klassischen Spektrometrie ihre Grenzen hat.\\
 	So liegt die Absorptionsbande von Citronensäure bei $\lambda$ = 200nm und ist mit den heutigen UV-Spetrometer kaum detektierbar \cite{Citricacid_UV}. Da die Rotationszustände charakteristisch ist, kann nicht nur qualitativ Citronensäure bestimmt werden sondern auch quantitativ.\\
@@ -128,14 +135,14 @@
 	
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.85]{Onlywater.png}
+			\includegraphics[scale=0.55]{Onlywater.png}
 			\caption{Infrarotspektrum von Wasser und Deuteriumoxid.}
 			\label{fig:water}
 		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.65]{water_citricacid_upclose.png}
+			\includegraphics[scale=0.60]{water_citricacid_upclose.png}
 			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und Citronensäure in Wasser im Wellenzahlbereich von 1450- 1930 cm$^{-1}$.}
 			\label{fig:water_citricacid}
 		\end{figure}
@@ -143,25 +150,58 @@
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=0.60]{Standardcurve_Fit.png}
-			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und 2mM Citronensäure in Wasser. Die Extrema in dem Bereich von Wasser und Deuteriumoxid überlappen mit dem Peak von Citronensäure.}
+			\caption{Infrarotspektrum von der Standardreihe von Citronensäure in Wasser von 0.2 bis 2 mM. }
 			\label{fig:Standardcurve}
 		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.55]{unknown_sample_fit.png}
+			\caption{Infrarotspektrum der unbekannten Citronensäuren Proben.}
+			\label{fig:IR_unknown}
+		\end{figure}
+
+
+			\begin{table}[H]
+			\centering
+			\caption{R$^2$-Werte des Gauss-Fitmodells für die Citronensäure-Standardreihe.}
+			\label{tab:r_square_standardcurve}
+			\begin{tabular}{ccc}
+				\toprule
+				c(Citronensäure) in mM & Maxima SI &R$^2$-Werte\\
+				\midrule
+				0.2	&0.033&0.982\\
+				0.4	&0.073&0.990\\
+				0.6	&0.108&0.989\\
+				0.8	&0.144&0.990\\
+				1.0	&0.158&0.990\\
+				1.2	&0.186&0.991\\
+				1.4	&0.223&0.990\\
+				1.6	&0.256&0.990\\
+				1.8	&0.292&0.989\\
+				2.0	&0.323&0.990\\
+				\bottomrule
+			\end{tabular}
+		\end{table}	
+		
 	
 		\begin{table}[H]
 			\centering
-			\caption{Pipettierschema der Standardreihe von Citronensäure in H$_2$O. Die molare Konzentration der Stammlösung beträgt 2mM in Wasser.}
+			\caption{Molare Konzentration der Unbekannten Citronensäureproben berechnet aus der Standardkurve in Figure \ref{fig:Standardcurve}.}
 			\label{tab:sampleconc}
 			\begin{tabular}{cc}
 				\toprule
 				Samplename & c(Sample) in mM\\
 				\midrule
-				Sample 1 & 1.04\\
-				Sample 2 & 0.58\\
+				Sample 1 & 1.04 $\pm$ 0.012\\
+				Sample 2 & 0.58 $\pm$ 0.007\\
 				\bottomrule
 			\end{tabular}
 		\end{table}	
 	\subsubsection{Konzentrationsbestimmung von Citronensäure}
 	\subsection{Sekundärstrukturaufklärung von Polylysin}
+	
+	\section{Error estimation}
 	
 	
 	
@@ -174,9 +214,16 @@
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.60]{Standardcurve_citricacid_fit.png}
+			\includegraphics[scale=0.55]{Standardcurve_citricacid_fit.png}
 			\caption{Infrarotspektrum der Verdünnungsreihe von Citronensäure in Wasser und der gaussche Fit des Maxima.}
 			\label{fig:IR_Standardcurve}
+		\end{figure}
+	
+		\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.55]{Polylysin.png}
+		\caption{Infrarot-Transmissionsspektrum von Polylysin (ß $\approx$ 10 mg/mL in D$_2$O) bei unterschiedlichen Bedingungen.}
+		\label{fig:polylysion_IR_Spektrum}
 		\end{figure}
 	
 		\subsubsection{Standardreihe Citronensäure}

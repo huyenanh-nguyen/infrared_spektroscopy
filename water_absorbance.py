@@ -86,7 +86,7 @@ class Raw_data_Plot:
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
         plt.grid(axis='both', color='0.95')
-        #ax.set(xlim=(1560, 1710), ylim = (-0.1, 0.1))
+        ax.set(xlim=(1560, 1710), ylim = (-0.1, 0.1))
         plt.legend()
         plt.show()
 
@@ -116,6 +116,7 @@ class Raw_data_Plot:
         max_extinction = []
         a = []
         error = []
+        x0 = []
         for i in range(len(filename)):
             x = np.asarray(wavenumber[i])
             y = np.asarray(extinction[i])
@@ -138,12 +139,14 @@ class Raw_data_Plot:
             
 
             x_value = np.linspace(x.min(), x.max(),1000)
-            raw_text = label[i] + " raw data"
-            plt.plot(x, y, label = raw_text)
-            text = label[i] + " fit"
-            plt.plot(x_value, Gauss(x_value, *shorten_popt), label = text, linestyle= 'dotted')
+            raw_text = label[i] + "\n" + "R$^2$ = " + f"{r_square : 0.3f}"
+            lines = plt.plot(x, y, label = raw_text)
+            color = lines[0].get_color()
+            # text = "\n" + label[i] + " fit" + "\n" + "R$^2$ = " + f"{r_square : 0.3f}" + "\n"
+            plt.plot(x_value, Gauss(x_value, *shorten_popt), linestyle= 'dotted', color = color)
             max_extinction.append(Gauss(x_value, *shorten_popt).max())
             a.append(shorten_popt[0])
+            x0.append(shorten_popt[1])
             error.append(r_square)
             # error.append(np.linalg.norm(y-Gauss(x, *shorten_popt))) # Frobenius norm -> could tell me how well it fits. but its better if i want to compare different model and look which one is the best fit
 
@@ -155,7 +158,7 @@ class Raw_data_Plot:
         plt.legend()
         plt.show()
 
-        return max_extinction, a, error
+        return max_extinction, a, x0, error
 
 
     def standardcurve(self, label, start, end):
@@ -176,7 +179,7 @@ class Raw_data_Plot:
 
         std = np.sqrt(np.diag(pcov))
 
-        text = "y = (" + str(round(popt[0],3)) + "$\pm$" + str(round(std[0], 4)) +") x \n"+ "R$^2$ = " + str(round(r_square, 3))
+        text = "y = (" + f"{popt[0] : 0.3f}" + "$\pm$" + f"{std[0] : 0.3f}" +") x \n"+ "R$^2$ = " + f"{r_square : 0.3f}"
 
         plt.scatter(conc, extinction[0], marker = ".")
         plt.plot(x_value, linear(x_value, popt[0]), label = text, color = "orange")
@@ -204,30 +207,26 @@ class Raw_data_Plot:
         for i in range(len(filename)):
             x = np.asarray(wavenumber[i])
             y = np.asarray(extinction[i])
-                        
-            mean = x[y.argmax()]                  #note this correction
-            sigma = mean - np.where(y > y.max() * np.exp(-.5))[0][0]        #note this correction
-
-            popt, pcov = curve_fit(Gauss, x, y, p0 = [y.max(),mean,sigma])
-
-            # best fit
-            fit_extinction = y[extinction[i].index(y.max())-15 : extinction[i].index(y.max())+15]
-            fit_wavenumber = x[extinction[i].index(y.max())-15 : extinction[i].index(y.max())+15]
-
-            shorten_popt, shorten_cov = curve_fit(Gauss, fit_wavenumber, fit_extinction, p0 = [*popt])
-
             
 
             x_value = np.linspace(x.min(), x.max(),1000)
             raw_text = label[i] + " raw data"
             plt.plot(x, y, label = raw_text)
-            text = label[i] + " fit"
-            plt.plot(x_value, Gauss(x_value, *shorten_popt), label = text, linestyle= 'dotted')
-            max_extinction.append(Gauss(x_value, *shorten_popt).max())
+            
+        anno1 = "[" + f"{x[y.argmax()] : 0.0f}"+";" + f"{y.max() : 0.3f}" + "]"
+        anno2 = "[" + f"{x[y.argmax()] : 0.0f}"+";" + f"{y.max() : 0.3f}" + "]"
+        anno3 = "[" + f"{x[y.argmax()] : 0.0f}"+";" + f"{y.max() : 0.3f}" + "]"
+        anno4 = "[" + f"{x[y.argmax()] : 0.0f}"+";" + f"{y.max() : 0.3f}" + "]"
+        
+
+
+        ax.annotate(anno1, xy=(1612,0.078), #xytext=(x[y.argmax()]+0.05, y.max()+0.05),
+                    arrowprops=dict(arrowstyle="->"),
+                    )
 
         plt.xlabel("wavenumber in cm$^{-1}$", fontsize=12)
         plt.ylabel("SI", fontsize=12)
-        ax.set(xlim=(min(wavenumber[0]), max(wavenumber[0])))
+        ax.set(xlim=(min(wavenumber[0]), max(wavenumber[0])), ylim = (-0.1, 0.12))
         plt.grid(axis='both', color='0.95')
         plt.legend()
         plt.show()
@@ -248,24 +247,31 @@ citricacid_standardcurve = Raw_data_Plot([
             "raw_data/2mMCitronensaeure.DPT",
                                           ])
 
-allwater = Raw_data_Plot(["raw_data/H2O.DPT", "raw_data/D2O.DPT", "raw_data/2mMCitronensaeure.DPT"])
-print(allwater.fit_gaussian_to_data(["H$_2$O", "D$_2$O", "2mM Citric Acid"],1633, 1936))
-print(allwater.multiple_plot_show(["H$_2$O", "D$_2$O", "2mM Citric Acid"]))
-sample = Raw_data_Plot(["raw_data/probe1_Citronensaeure.DPT", "raw_data/probe2_Citronensaeure.DPT"]).fit_gaussian_to_data(["Sample 1", "Sample 2"], 1633, 1936)
-print(sample)
-print(citricacid_standardcurve.standardcurve(["0.2 mM ",
-            "0.4 mM ",
-           "0.6 mM ",
-          "0.8 mM ",
-           "1.0 mM ",
-            "1.2 mM ",
-            "1.4 mM ",
-            "1.6 mM ",
-            "1.8 mM ",
-            "2.0 mM ",
-        ],1633, 1936))
+allwater = Raw_data_Plot(["raw_data/H2O.DPT", "raw_data/D2O.DPT"])
+# print(allwater.fit_gaussian_to_data(["H$_2$O", "D$_2$O"],1633, 1936))
+# print(allwater.multiple_plot_show(["H$_2$O", "D$_2$O"]))
+# sample = Raw_data_Plot(["raw_data/probe1_Citronensaeure.DPT", "raw_data/probe2_Citronensaeure.DPT"]).fit_gaussian_to_data(["Sample 1", "Sample 2"], 1633, 1936)
+# print(sample)
+# print(citricacid_standardcurve.fit_gaussian_to_data(["0.2 mM ",
+#             "0.4 mM ",
+#            "0.6 mM ",
+#           "0.8 mM ",
+#            "1.0 mM ",
+#             "1.2 mM ",
+#             "1.4 mM ",
+#             "1.6 mM ",
+#             "1.8 mM ",
+#             "2.0 mM ",
+#         ],1633, 1936))
 
 
-polylysin = Raw_data_Plot(["raw_data/pHneutral_Polylysin.DPT", "raw_data/pH1162_Polylysin.DPT", "raw_data/50grad_Polylysin.DPT"])
-print(polylysin.gauss_for_secondarystructure(["pH neutral, auf Eis", "pH = 11.62", "bei 50°C"], 1712,  1876))
+# polylysin = Raw_data_Plot(["raw_data/pHneutral_Polylysin.DPT", "raw_data/pH1162_Polylysin.DPT", "raw_data/50grad_Polylysin.DPT"])
+# print(polylysin.multiple_plot_show(["pH neutral, auf Eis", "pH = 11.62", "bei 50°C"]))
+beta = Raw_data_Plot(["raw_data/50grad_Polylysin.DPT"])
+print(beta.gauss_for_secondarystructure(["bei 50°C"], 1712,  1821))
+
+
+# 1712,  1876  1612;0.078    1680;-0.051
+# 11.62 637; 0.040
+# neutra 1644;0.031
 
