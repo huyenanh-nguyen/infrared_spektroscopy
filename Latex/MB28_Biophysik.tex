@@ -51,7 +51,7 @@
 			
 			\textcolor{Bluetitle}{\textbf{\huge Infrarotspektroskopie}}\par
 			\vspace*{0.5cm}
-			\textcolor{softbluetitle}{\textbf{\Large Quantitative und Qualitative Bestimmung von Citronensäure und Sekundärstrukturanalyse von Polylysin}}\par
+			\textcolor{softbluetitle}{\textbf{\Large ATR und TRansmissionsspektroskopie}}\par
 			
 			\vspace*{2cm}
 			
@@ -90,7 +90,7 @@
 	Je nach dem wie IR-aktiv ein Stoff ist, wird mehr oder weniger absorbiert, wodurch dann ein bestimmtes Bandenmuster gemessen werden kann.
 	Bei den Proteinen gibt es neun verschiedene IR-aktive Schwingungen, die in bestimmten Wellenzahlintervallen (Absortionsbanden) liegen. Die Banden werden als Amid A,B, I bis VII - Bande bezeichnet.\\
 	Für die Sekundärstrukturaufklärung in Proteinen ist die Amid I Bande am wichtigsten, da diese zum größtenteils durch die C=O Streckschwingung der Peptidbindung verursacht wird. Die Amid I Bande ist ein Komposition aus C=O - Valenzschwingungen, C-N-Streckschwingungen und N-H-Deformationsschwingungen, die in den Bereich 1600-1700 cm$^{-1}$ liegen.
-	Aufgrund dieser IR-Aktivität der Peptidbindung, kann die Sekundärstruktur von Polylysin bei den Bedingung :\\
+	Aufgrund dieser IR-Aktivität der Peptidbindung, kann die Sekundärstruktur von Polylysin bei den Bedingung :
 	\begin{itemize}
 		\item neutralen pH und auf Eis
 		\item basischen pH und auf eis
@@ -98,147 +98,225 @@
 	\end{itemize}
 	untersucht werden.\\
 	\\
-	Eine andere Messmethode in der Infrarotspektroskopie ist die attenuated total Reflexion (abgekürzt: ATR) - Spektroskopie.
-	Hier wird die Probe auf ein Kristall (Zinksilicium) aufgetragen und die Infrarotstrahlungen so auf das Kristall bestrahlt, so dass eine Totalreflexion im Kristall entsteht. Dabei bildet sich an der Grenzfläche eine evaneszente Welle, die mit der Probe interagieren kann. Durch die Interaktion wird die Intensität der reflektierte IR-Strahlung abgeschwächt\cite{ATR_wiki}.
+	Eine andere Messmethode in der IR-Spektroskopie ist die attenuated total Reflexion (abgekürzt: ATR) - Spektroskopie.
+	Hier wird die Probe auf ein Kristall (Zinksilicium-Kristallzelle) aufgetragen und die IR-Strahlungen so auf das Kristall bestrahlt, so dass eine Totalreflexion im Kristall entsteht. Dabei bildet sich an der Grenzfläche eine evaneszente Welle, die mit der Probe interagieren kann. Durch die Interaktion wird die Intensität der reflektierte IR-Strahlung abgeschwächt\cite{ATR_wiki}.
 	Die Intensität der reflektierten IR-Strahlung ist ebenfalls von der Probe abhängig, wodurch dieses Messprinzip verwendet werden kann, um feste aber auch flüssige Proben, wie die Citronensäure, zu charakterisieren.
 	Ein Vorteil dieser Methode ist, dass die Messung unabhängig von der Probemenge \cite{ATR_MT} ist.
 	
 	Für diesen Versuch werden die beiden Messmethoden verwendet um die Secundärstruktur von Polylysin bei neutralen, baischen pH-Wert und bei 50°C zu untersuchen.
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 	\section{Material und Methode}
 	Alle Messungen wurden am IFS 66v/S Spektrometer (Bruker, Berlin - Humboldt Universität zu Berlin am Biophysik Institut) durchgeführt.\\
-	Für die Maximabestimmung wurden mit der Gaussfunktion die Peaks in den ausgewählten Wellenzahlbereich in Python (scipy, curve$\_$fit) gefittet.
+	Auf der ATR-Zelle (Zinksilicium-Kristall) wurde so viel Wasser und Deuteriumoxid raufpipettiert, bis dieser vollständig bedeckt war und davon ein Infrarotspektrum jeweils aufgenommen.\\
+	Für die Konzentrationsbestimmung der Proben wurde ein linearen Fit mit der Funktion curve$\_$fit (scipy, Python) durchgeführt.\\
 	
-	\subsection{Citronensäure-Messungen}
-	Die Citronensäureproben wurden in Wasser gelöst und bei Normaldruck und 20 Grad Celsius auf die ATR-Zelle (Zink-Siliciumkristall) aufgetragen und das ART-Spektrum gemessen.\\
-	Gegen die Standardkurve, welches nach Table \ref{fig:IR_Standardcurve} hergestellt wurde, wurde die Konzentration der zwei unbekannten Citronensäureproben bestimmt.\\
-	Als Blanklösung wurde entionisiertes Wasser verwendet.\\
+		\subsection{Citronensäure-Messungen}
+		Die Citronensäureproben wurden in Wasser gelöst und bei Normaldruck und 20 Grad Celsius auf die ATR-Zelle aufgetragen und das IR-Spektrum gemessen.\\
+		Das Gleiche wurde für die Verdünnungsreihe (Pipettierschema siehe Table: \ref{fig:IR_Standardcurve}) durchgeführt.\\
+		Als Blanklösung wurde entionisiertes Wasser verwendet.\\
+		
 	
-
-	\subsection{Polylysin}
-	Polylysin wurde in Deuteriumoxid gelöst und das Transmissionsspektrum im Vakuum gemessen.\\
-	Die Proben wurden vor der Messung vorher in drei unterschiedlichen Bedingungen vorbehandelt:
-	\begin{itemize}
-		\item bei neutralen pH-Wert auf Eis
-		\item bei pH = 11.62 (pH-Einstellung mit Natronlauge)
-		\item 3 Minuten mit einer Heißluftpistole aufheizen
-	\end{itemize}
-	Als Blanklösung wurde Deuteriumoxid verwendet.
+		\subsection{Polylysin}
+		Polylysin (grob 10 mg/mL) wurde in Deuteriumoxid gelöst und das Transmissionsspektrum im Vakuum gemessen.\\
+		Die Proben wurden vor der Messung vorher in drei unterschiedlichen Bedingungen vorbehandelt:
+		\begin{itemize}
+			\item bei neutralen pH-Wert auf Eis
+			\item bei pH = 11.62 (pH-Einstellung mit Natronlauge)
+			\item 3 Minuten mit einer Heißluftpistole aufheizen
+		\end{itemize}
+		Als Blanklösung wurde Deuteriumoxid verwendet.
 	
 	
 	
 	\section{Ergebnis}
-	Die Kurven wurden am Hochpunkt mit der Gaussfunktion (Gl \ref{eq: Gauss}) gefittet und so die Maximawerte bestimmt.
+		\subsection{Wasser und Deuteriumoxid Infrarotspektrum}
 
-	\begin{equation}\label{eq: Gauss}
-		\text{f(x) = } a \cdot e^{-\frac{(x-x_0)^2}{2 \cdot \sigma^2}}
-	\end{equation}
-	
-	\subsection{Qualitative und Quantitative Bestimmung von Citronensäure}
-	
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.55]{Onlywater.png}
-			\caption{Infrarotspektrum von Wasser und Deuteriumoxid.}
-			\label{fig:water}
-		\end{figure}
-	
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.60]{water_citricacid_upclose.png}
-			\caption{Infrarotspektrum von Wasser, Deuteriumoxid und Citronensäure in Wasser im Wellenzahlbereich von 1450- 1930 cm$^{-1}$.}
-			\label{fig:water_citricacid}
-		\end{figure}
+			Beide besitzen ähnliche IR-Banden im Bereich von 1500 - 1900cm$^{-1}$ und 3000 - 4000  cm$^{-1}$  auf. Deuteriumoxid besitzt noch zwei weitere Banden bei 100 - 1500 cm$^{-1}$ und 2400 - 2800cm$^{-1}$ (siehe Figure \ref{fig:water}) .
 		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{Onlywater.png}
+				\caption{Infrarotspektrum von Wasser und Deuteriumoxid.}
+				\label{fig:water}
+			\end{figure}
+		
+	
+		\subsection{Charakterisierung von Citronensäure}
+			In Figure \ref{fig:water_citricacid} wurde verglichen, ob Wasser oder Deuteriumoxid die Messung von Citronensäure behindern.\\
+			Die SI$_{max}$ von Citronensäure liegt ungefähr im Bereich von 1718 cm$^{-1}$ und überlappt mit Wasser und Deuteriumoxid.\\
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.60]{water_citricacid_upclose.png}
+				\caption{Vergleich der Bande von Wasser, Deuteriumoxid und Citronensäure in Wasser im Wellenzahlbereich von 1450- 1930 cm$^{-1}$.}
+				\label{fig:water_citricacid}
+			\end{figure}
+
+			Für die Konzentrationsbestimmung der unbekannten Proben, wurde eine Standardsreihe (oder auch Verdünnungsreihe genannt) hergestellt und gemessen.\\
+			Die SI$_{max}$  der einzelnen Standardkonzentrationen wurden in Abhängigkeit der Citronenkonzentration aufgetragen (siehe Figure \ref{fig:Standardcurve}). a ist die Steigung der gefittete Gerade. Die Datenpunkte wurden nach der Gleichung (\ref{eq: linear_fit}) gefittet und die Konzentration der Proben (in Table \ref{tab:sampleconc}) wurden nach Gleichung (\ref{eq: concbest}) ermittelt.\\
+
+			\begin{equation}\label{eq: linear_fit}
+				SI_{max} (c)= a \cdot c\\
+			\end{equation}
+			
+			\begin{equation}\label{eq: concbest}
+				c = \frac{SI_{max}}{a}
+			\end{equation}
+			
+			\begin{table}[H]
+				\centering
+				\caption{Molare Konzentration der Unbekannten Citronensäureproben berechnet aus der Standardkurve in Figure \ref{fig:Standardcurve}.}
+				\label{tab:sampleconc}
+				\begin{tabular}{cc}
+					\toprule
+					Samplename & c(Sample) in mM\\
+					\midrule
+					Sample 1 & 1.04 $\pm$ 0.012\\
+					Sample 2 & 0.58 $\pm$ 0.007\\
+					\bottomrule
+				\end{tabular}
+			\end{table}	
+
+			Eine unvollständige Gauss'sche Fehlerfortpflanzung (siehe in Gleichung (\ref{eq :error}))wurde hier für die Unbekannten durchgeführt, da nicht die Messungenauigkeit des IFS 66v/S Spektrometer notiert wurde. Zudem werden auch die Fehler der Pipette vernachlässig.
+			
+			\begin{equation}\label{eq :error}
+				\begin{split}
+					\Delta c = \sqrt{\left( \frac{SI_{max}}{a^2}\right)^2 \cdot \Delta a}
+				\end{split}
+			\end{equation}
+			
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.60]{Standardcurve_Fit.png}
-			\caption{Infrarotspektrum von der Standardreihe von Citronensäure in Wasser von 0.2 bis 2 mM. }
+			\includegraphics[scale=0.55]{Standardcurve_Fit.png}
+			\caption{Die Abhänigkeit der maximale Signalintensität von Citronensäure in Wasser von der molaren Konzentration. }
 			\label{fig:Standardcurve}
 		\end{figure}
 		
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.55]{unknown_sample_fit.png}
-			\caption{Infrarotspektrum der unbekannten Citronensäuren Proben.}
-			\label{fig:IR_unknown}
-		\end{figure}
 
-
-			\begin{table}[H]
-			\centering
-			\caption{R$^2$-Werte des Gauss-Fitmodells für die Citronensäure-Standardreihe.}
-			\label{tab:r_square_standardcurve}
-			\begin{tabular}{ccc}
-				\toprule
-				c(Citronensäure) in mM & Maxima SI &R$^2$-Werte\\
-				\midrule
-				0.2	&0.033&0.982\\
-				0.4	&0.073&0.990\\
-				0.6	&0.108&0.989\\
-				0.8	&0.144&0.990\\
-				1.0	&0.158&0.990\\
-				1.2	&0.186&0.991\\
-				1.4	&0.223&0.990\\
-				1.6	&0.256&0.990\\
-				1.8	&0.292&0.989\\
-				2.0	&0.323&0.990\\
-				\bottomrule
-			\end{tabular}
-		\end{table}	
+		\subsection{Sekundärstrukturanalyse von Polylysin}
 		
-	
-		\begin{table}[H]
-			\centering
-			\caption{Molare Konzentration der Unbekannten Citronensäureproben berechnet aus der Standardkurve in Figure \ref{fig:Standardcurve}.}
-			\label{tab:sampleconc}
-			\begin{tabular}{cc}
-				\toprule
-				Samplename & c(Sample) in mM\\
-				\midrule
-				Sample 1 & 1.04 $\pm$ 0.012\\
-				Sample 2 & 0.58 $\pm$ 0.007\\
-				\bottomrule
-			\end{tabular}
-		\end{table}	
-	\subsubsection{Konzentrationsbestimmung von Citronensäure}
-	\subsection{Sekundärstrukturaufklärung von Polylysin}
-	
-	\section{Error estimation}
-	
-	
+			In Figure \ref{fig:polylysin_IR_Spektrum} wurden die drei IR-Spektrum im Wellenzahlbereich von 1560 - 1750 cm$^{-1}$ dargestellt.\\
+			Polylysin zeigt bei neutralem und basischen Bedingung jeweil ein SI$_{max}$ im Bereich von circa 1640 cm$^{-1}$. Wird Polylysin auf 50 °C aufgeheißt, sind zwei SI$_{max}$ bei 1612 und 1680 cm$^{-1}$ sichtbar (siehe Table \ref{tab:Polylysin_SI}).
+				
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{Polylysin.png}
+				\caption{IR-Transmissionsspektrum von Polylysin (ß $\approx$ 10 mg/mL in D$_2$O) bei unterschiedlichen Bedingungen im Wellenzahlbereich von 1560 - 1750 cm$^{-1}$.}
+				\label{fig:polylysin_IR_Spektrum}
+			\end{figure}
+			
+			\begin{table}[H]
+				\centering
+				\caption{Wellenzahl von Polylysin bei unterschiedlichen Bedingungen, wo im Bereich von 1560 - 1750 cm$^{-1}$ eine maximale Signalintensität zu sehen ist.}
+				\label{tab:Polylysin_SI}
+				\begin{tabular}{cc}
+					\toprule
+					Bedingung & wavenumber$_{max}$ in cm$^{-1}$\\
+					\midrule
+					pH neutral & 1644\\
+					&\\
+					pH = 11.62 & 1636\\
+					&\\
+					\multirow{2}{*}{50°C } & 1612\\
+					& 1680\\
+					\bottomrule
+				\end{tabular}
+			\end{table}	
+
 	
 	\section{Diskussion}
-	\subsection{Citronensäure}
-	\subsection{Polylysin}
-	
-	\section{Anhang}
-	\subsection{Rohdaten}
+		\subsection{Wasser und Deuteriumoxid}
+			In Figure \ref{fig:water} wurde das IR-Spektrum von Wasser und Deuteriumoxid dargestellt. Den Kurvenverlauf der beiden ähneln sich sehr. Bei der Datensicherung könnte eventuell ein Fehler unterlaufen sein, da Deuteriumoxid in dem Bandenbereich von Amid I der Proteine eine schwache SI$_{max}$  bei 1555 cm$^{-1}$ \cite{infrared_d2o_h2o} zeigt und eine mittelstarke SI$_{max}$  bei 1209 cm$^{-1}$\cite{infrared_d2o_h2o}. in diesen Fall ist die SI$_{max}$ bei beiden Banden relativ gleich stark und hoch\\
+			Vermutet wird, dass die in Figure \ref{fig:water} dargestellte Deuteriumoxid IR-Spektrum sich eventuell von einem Citronensäure in Deuteriumoxid gelöst handelt.\\
+			Wird das komplette IR-Spektrum der Proben dargestellt, wie in Figure \ref{fig:wasser_Citrat_full}, dann sind viele Peaks der Citronensäure ähnlich wie von der Deuteriumoxid oder um etwas anderes, nur nicht reinem Deuteriumoxid.\\
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{water_citricacid.png}
+				\caption{Infrarotspektrum von Wasser, Deuteriumoxid und 2 mM Citronensäure}
+				\label{fig:wasser_Citrat_full}
+			\end{figure}
+			
+			Für die Amid I Bande bei der Proteinstrukturanalyse wird gerne Deuteriumoxid verwendet, da dort die Absorption nicht so intensiv ist wie bei Wasser und deswegen bei der Messung nicht stört.\\
+			Wie aber in Figure \ref{fig:water_polylysin_full} zu sehen ist, sind die Peaks von Wasser und Deuteriumoxid gleich hoch und überlappen sehr die Peaks des Peptids.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{water_polylysin.png}
+				\caption{Signalintensität von Wasser, Deuteriumoxid und Polylysin in Abhänigkeit von der Wellenzahl im Bereich von 1550-1750 cm$^{-1}$}
+				\label{fig:water_polylysin_full}
+			\end{figure}
+			
+			Für Den vergleich Wasser und Deuteriumoxid und warum welches geeigneter für eine Messung wäre, müsste die Messung wiederholt werden, da nicht nachvollzogen werden kann, welche Probe das "Deuteriumoxid"-Spektrum ist.
+			
+			\subsection{Citronensäure}
+			Citronensäure ist ein Molekül das bei Ultra Violettes Licht ein breites Absorptionsbande im bereich von $\lambda$ = 200 nm bildet \cite{Citricacid_UV}. Das ist für die heutigen Photometer kaum messbar, weswegen die IR-Spektroskopie eine gute Messmethode darstellt.\\
+			Citronensäure zeigt eine intensive SI$_{max}$ im Bandenbereich von 1500 - 1800 cm$^{-1}$, welches geeignet ist für die quantitative Analyse von Citronensäure.\\
+			Da sowohl Deuteriumoxid und Wasser in der Absorption diese Bande bei Citronensäure etwas überlappen, macht es kein Unterschied ob Citronensäure in Wasser oder in Deuteriumoxid gemessen wird. Da Deuterium preislicher ist als Wasser und auch mengenmäßig mit Wasser gleicht, ist es sinnvoller Citronensäure in Wasser zu messen.\\
+			Die beiden unbekannten Proben 1 und 2 haben bei dieser Messung eine Konzentration von 1.04 $\pm$ 0.012 mM und 0.58 $\pm$ 0.007.
+			Da jeweil bei der Standardreihe und bei der Probe nur eine Einfachmessung durchgeführt wurde, weichen die Werte sehr von dem realen Wert ab.\\
+			Für eine bessere quantitative Aussage sollen mehr Mehrfachwerte der einzelnen Proben durchgeführt werden.
+			
+			\subsection{Polylysin}
 		
-		\begin{figure}[H]
+		
+		
+		
+		
+	\section{Anhang}
+		\subsection{Rohdaten}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{Standardcurve_citricacid.png}
+				\caption{Infrarotspektrum der Verdünnungsreihe von Citronensäure in Wasser und der gaussche Fit des Maxima.}
+				\label{fig:IR_Standardcurve}
+			\end{figure}
+			
+			\begin{table}[H]
+				\centering
+				\caption{Signalintensitäts-Werte der Standardreihe.}
+				\label{tab:r_square_standardcurve}
+				\begin{tabular}{cc}
+					\toprule
+					c(Citronensäure) in mM & SI$_{max}$\\
+					\midrule
+					0.2	&0.035\\
+					0.4	&0.074\\
+					0.6	&0.109\\
+					0.8	&0.146\\
+					1.0	&0.159\\
+					1.2	&0.188\\
+					1.4	&0.226\\
+					1.6	&0.258\\
+					1.8	&0.295\\
+					2.0	&0.327\\
+					\bottomrule
+				\end{tabular}
+			\end{table}	
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.55]{unknown_sample.png}
+				\caption{Infrarotspektrum der unbekannten Citronensäuren Proben.}
+				\label{fig:IR_unknown}
+			\end{figure}
+				
+			\begin{table}[H]
 			\centering
-			\includegraphics[scale=0.55]{Standardcurve_citricacid_fit.png}
-			\caption{Infrarotspektrum der Verdünnungsreihe von Citronensäure in Wasser und der gaussche Fit des Maxima.}
-			\label{fig:IR_Standardcurve}
-		\end{figure}
-	
-		\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.55]{Polylysin.png}
-		\caption{Infrarot-Transmissionsspektrum von Polylysin (ß $\approx$ 10 mg/mL in D$_2$O) bei unterschiedlichen Bedingungen.}
-		\label{fig:polylysion_IR_Spektrum}
-		\end{figure}
-	
-		\subsubsection{Standardreihe Citronensäure}
+			\caption{Signalintensitäts-Werte der unbekannten Citronensäure.}
+			\label{tab: SI_unknownsample}
+				\begin{tabular}{cc}
+						\toprule
+						Probe & SI$_{max}$\\
+						\midrule
+						Sample 1 & 0.170\\
+						Sample 2 & 0.095\\
+						\bottomrule
+				\end{tabular}
+			\end{table}			
+		
 			\begin{table}[H]
 				\centering
 				\caption{Pipettierschema der Standardreihe von Citronensäure in H$_2$O. Die molare Konzentration der Stammlösung beträgt 2mM in Wasser.}
