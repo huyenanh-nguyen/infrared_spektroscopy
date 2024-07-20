@@ -37,7 +37,7 @@ class Plotting:
                     extinction.append(float(extin))
                 
             data_dict[i] = {"wavenumber" : wavenumber, "extinction" : extinction}
-        return data_dict
+        return data_dict 
 
 
     def plotpoints(self, label, xstart, xstop):
@@ -45,7 +45,7 @@ class Plotting:
         extinction = [self.dptfile_to_dict()[i]["extinction"][xstart : xstop] for i in range(len(self.dptfile_to_dict()))]
 
         fig = plt.figure()
-        ax =  fig.add_subplot()
+        # ax =  fig.add_subplot()
 
         max_SI = []
         max_wave = []
